@@ -1,0 +1,50 @@
+Core2Bundle\Entity\Product:
+    type: entity
+    table: products 
+#    par defaut = null le nom de l'entite
+    repositoryClass: Core2Bundle\Repository\ProductRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        price:
+            type: float
+            nullable: true
+        qte:
+            type: integer
+            nullable: true
+        file:
+            type : string
+            nullable: true
+        created:
+            type: date
+            gedmo:
+              timestampable:
+                on: create
+        updated:
+          type: datetime
+          gedmo:
+            timestampable:
+              on: update
+        slug:
+            type: string
+            length: 128
+            gedmo:
+                slug:
+                    separator: _
+                    style: camel
+                    fields:
+                        - name
+              
+    manyToOne:
+        categorie:
+            targetEntity: Category
+            inversedBy: produit
+    lifecycleCallbacks: {  }

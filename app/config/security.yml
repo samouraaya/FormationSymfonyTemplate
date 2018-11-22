@@ -1,0 +1,45 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    encoders:
+#        pour cryptage de la class user
+        Core2Bundle\Entity\User: bcrypt
+#        FOS\UserBundle\Model\UserInterface: bcrypt
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+#       A configurer 
+#        3 roles USER, ADMIN ET SUPER_ADMIN
+#        ROLE_SUPER_ADMIN: [ROLE_ADMIN, ]
+
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+#    fournisseur de connexion : username or téléphone pas d'autre
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        main:
+            pattern: ^/
+#            ^/ appliquer sur toutes l'app: dossier racine
+            form_login:
+                provider: fos_userbundle
+#                csrf_token_generator: security.csrf.token_manager
+                # if you are using Symfony < 2.8, use the following config instead:
+                # csrf_provider: form.csrf_provider
+
+            logout:       true
+            anonymous:    true
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+#        dans le cas ou l'admin qui gére les users => il faut le désactiver
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, role: IS_AUTHENTICATED_FULLY }
+#        rester connecter en tant que connecté
+#        IS_AUTHENTICATED_REMENBER : connecter à partir de cookies
+#       - { path: ^/admin/, role: ROLE_ADMIN }

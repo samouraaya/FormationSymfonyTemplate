@@ -1,0 +1,3 @@
+core2_homepage:
+    path:     /
+    defaults: { _controller: Core2Bundle:Default:index }

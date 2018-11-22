@@ -1,0 +1,22 @@
+Core2Bundle\Entity\Category:
+    type: entity
+    table: null 
+#    par defaut = null le nom de l'entite
+    repositoryClass: Core2Bundle\Repository\CategoryRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+    oneToMany:
+        produit:
+            targetEntity: Product
+            mappedBy: categorie
+    
+    lifecycleCallbacks: {  }

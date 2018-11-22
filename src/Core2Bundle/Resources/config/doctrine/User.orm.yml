@@ -1,0 +1,20 @@
+Core2Bundle\Entity\User:
+    type: entity
+    table: null 
+#    par defaut = null le nom de l'entite
+    repositoryClass: Core2Bundle\Repository\UserRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        firstname:
+            type: string
+            length: 255
+            nullable: true
+        lastname:
+            type: string
+            length: 255
+            nullable: true

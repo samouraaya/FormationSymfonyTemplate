@@ -1,0 +1,29 @@
+{% extends "AppBundle:Layaout:base.html.twig" %}
+
+{% block body %}
+    <h1>Category edit</h1>
+    
+    {{ form_start(edit_form, {attr: {novalidate: 'novalidate', class: 'form-horizontal'}}) }}
+    <div class="form-group">
+            {{ form_label(edit_form.name) }}
+            <div class="col-sm-10">
+                {{ form_widget(edit_form.name) }}
+                {{ form_errors(edit_form.name) }}
+            </div>
+        </div>
+        <br><br>
+    
+    <div class="form-group">
+            {{ form_start(edit_form) }}
+            {{ form_widget(edit_form) }}
+            <input class="btn btn-success" type="submit" value="Ajouter" />
+            {{ form_end(edit_form) }}
+            <a class="btn btn-info" href="{{ path('category_index') }}">Annuler</a>
+
+            {{ form_start(delete_form) }}
+            <input class="btn btn-danger" type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </div>
+    </form>
+    
+{% endblock %}

@@ -1,0 +1,11 @@
+core_homepage:
+    path:     /test/{x}
+    defaults: { _controller: CoreBundle:Default:index, x:12 }
+#    x:12 dans le cas où il n'y a pas de variable GET
+#    forcer la variable GET comme nombre ctrl+shift+c
+    requirements:
+        x: '\d+'
+
+core_test:
+    path:     /test2
+    defaults: { _controller: CoreBundle:Default:test }

@@ -1,0 +1,73 @@
+{% extends "AppBundle:Layaout:base.html.twig" %}
+
+{% block body %}
+    <h1>Categorys list</h1>
+
+    <table class="table table-striped" style="text-align: left">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for category in categorys %}
+                <tr>
+                    <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <a href="{{ path('category_show', { 'id': category.id }) }}"><i class="fa fa-list-alt"></i></a>
+                        <a href="{{ path('category_edit', { 'id': category.id }) }}"><i class="fa fa-pencil-square-o"></i></a>
+                        <a class="btn delete-Categorie" data-id="{{ category.id }}" ><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+    {% for category in categorys %}
+        {{ category.name }}<br />
+        {% for category2 in category.produit %}
+            {{ category2.name }}| {{ category2.id }}<br />
+        {% endfor %}<br /><br />
+    {% endfor %}
+    <hr /><hr />
+    {% for tab in TabData %}
+        {{ tab.categorie }}<br />
+        {% for tabprod in tab.produits %}
+            {{ tabprod.name }} | {{ tabprod.id }}<br />
+        {% endfor %}<br /><br />
+    {% endfor %}
+
+    <ul>
+        <li>
+            <a href="{{ path('category_new') }}">Create a new category</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block javascripts %}
+    {{ parent()}}
+    <script>
+        $('.delete-Categorie').on('click', function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            if (confirm('vouler vous supprimer la catégorie avec l\'id' + id)) {
+                $.ajax({
+                    url: Routing.generate('category_remove', {id: id}),
+                    method: "POST",
+                    data: {},
+                    success: function (result) {
+                        $("#bloc-message").html(result);
+                        $("#bloc-content-" + id).remove();
+                    },
+                    error: function (result) {
+                    }
+                });
+            }
+        });
+
+    </script>
+{% endblock %}

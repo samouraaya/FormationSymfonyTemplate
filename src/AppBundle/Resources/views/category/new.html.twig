@@ -1,0 +1,33 @@
+{% extends "AppBundle:Layaout:base.html.twig" %}
+
+{% block body %}
+    <h1>Category creation</h1>
+
+    {{ form_start(form, {attr: {novalidate: 'novalidate', class: 'form-horizontal'}}) }}
+    {#        {{ form_widget(form) }} 
+    afficher tous les champs
+    form_error#}
+    <small style="color: red">{{ form_errors(form) }}</small>
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+    <br><br>
+
+    {{ form_widget(form._token) }}
+    {#        générer le token pour éviter les erreurs#}
+
+    {{ form_widget(form._token) }}
+    {#        générer le token pour éviter les erreurs#}
+    <div class="form-group">
+        <a class="btn btn-info" href="{{ path('category_index') }}">Back to the list</a>
+
+        <input class="btn btn-danger" type="submit" value="Create">
+    </div>
+    {#{{ form_end(form) }}#}
+</form>
+{#afficher que les champs mentionnées#}
+{% endblock %}

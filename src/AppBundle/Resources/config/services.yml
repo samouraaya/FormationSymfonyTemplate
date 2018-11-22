@@ -1,0 +1,4 @@
+services:
+    app.categorie:
+        class: AppBundle\Service\Category
+        arguments: ["@doctrine.orm.entity_manager"]

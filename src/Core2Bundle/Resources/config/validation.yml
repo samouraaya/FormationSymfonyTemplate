@@ -1,0 +1,20 @@
+Core2Bundle\Entity\Product:
+    properties:
+        name:
+        #le nom de la colonne
+#            - NotBlank: ~
+             - NotBlank:
+                 message: nom du produit obligatoire
+             - Length:
+                min: 3
+                max: 10
+                minMessage: 'Your first name must be at least {{ limit }} characters long'
+                maxMessage: 'Your first name cannot be longer than {{ limit }} characters'
+        price:
+             - NotBlank:
+                 message: prix du produit obligatoire
+        qte:
+             - NotBlank:
+                 message: quantité du produit obligatoire
+#            - EqualTo:
+#                value: 20

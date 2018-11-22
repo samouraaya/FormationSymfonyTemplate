@@ -1,0 +1,39 @@
+{% extends "AppBundle:Layaout:base.html.twig" %}
+
+{% block body %}
+    <h1>Product</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr>
+                <th>Qte</th>
+                <td>{{ product.qte }}</td>
+            </tr>
+            <tr>
+            <th>Image</th>
+            <td><img src="{{ asset('uploads/'~ product.file) }}" width="150px" height="150px" ></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-info" href="{{ path('product_index') }}">Back to the list</a>
+    <a class="btn btn-warning" href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>
+    <br><br>
+    {{ form_start(delete_form) }}
+    <input type="hidden" name="_method" value="DELETE" />
+    <input class="btn btn-danger" type="submit" value="Delete">
+    {{ form_end(delete_form) }}
+
+{% endblock %}

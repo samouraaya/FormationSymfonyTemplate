@@ -1,0 +1,116 @@
+{% extends "AppBundle:Layaout:base.html.twig" %}
+
+{% block body %}
+    <h1>Products list</h1>
+
+    <select class="form-control lstcategorie" id="lstcategorie" name="lstcategorie">
+        <option value="tous" >Tous</option>
+        {% for category in categorys %}
+            <option value="{{ category.id }}" {% if categ == category.id %}selected{% endif %} >{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <div id="bloc-message"></div>
+    <table class="table table-striped" style="text-align: left">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Qte</th>
+                <th>Catégorie</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr id="bloc-content-{{ product.id }}">
+                    <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.qte }}</td>
+                    <td>{% if product.categorie %}{{ product.categorie.name }}{% else %}---{% endif %}</td>
+                    <td>
+                        <a class="btn" href="{{ path('product_show', { 'id': product.id }) }}"><i class="fa fa-list-alt"></i></a>
+                        <a class="btn" href="{{ path('product_edit', { 'id': product.id }) }}"><i class="fa fa-pencil-square-o"></i></a>
+                            {#                        <a class="btn" href="#" onClick="deleteProduit('{{ product.id }}')"><i class="fa fa-trash-o"></i></a>#}
+                        <a class="btn delete-Produit" data-id="{{ product.id }}" ><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('product_new') }}">Create a new product</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block javascripts %}
+    {{ parent()}}
+    <script>
+        function deleteProduit(id)
+        {
+            console.log(id);
+        }
+
+        $('.lstcategorie').on('change', function () {
+            var id = lstcategorie.value;
+            window.location.replace(Routing.generate('product_index', {category: id}));
+            //console.log(id);
+        });
+
+        $('.delete-Produit').on('click', function (e) {
+            e.preventDefault();
+        {#var id = $(this).data('id');
+        console.log(id);#}
+                var id = $(this).data('id');
+                if (confirm('vouler vous supprimer le produit avec l\'id' + id)) {
+                    $.ajax({
+        {#rendre url dynamique => installer fosjsroutin
+url: "http://localhost/formationsymfony32018/web/app_dev.php/product/" + id + "/remove",#}
+                url: Routing.generate('product_remove', {id: id}),
+                method: "POST",
+        {#url: "/",
+        method: "GET",
+        refraichissement dans la meme page#}
+                        data: {},
+                        success: function (result) {
+        {#                            console.log(result);#}
+        {#                            location.reload();#}
+        {#            remplace innerhtml#}
+                            $("#bloc-message").html(result);
+                            $("#bloc-content-" + id).remove();
+                        },
+                        error: function (result) {
+                        }
+                    });
+                }
+            });
+        {#function (e) : fonction anonym appel de la fonction lors de déclaration
+        preventDefault : desactiver refresh
+        e evenement#}
+
+        {#$.ajax({
+            type: "POST",
+            url: "",
+            data: {constructeur: document.getElementById("").value},
+            success: function (response) {
+                document.getElementById("").innerHTML = response;
+            }
+        });
+
+        function notif_clcreer() {
+            $.ajax({
+                url: "",
+                ifModified: true,
+                success: function (content) {
+                    $('').html(content);
+                }
+            });
+            setTimeout(notif_clcreer, 6000);
+        }
+        notif_clcreer();#}
+
+    </script>
+{% endblock %}

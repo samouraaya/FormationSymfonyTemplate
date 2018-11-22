@@ -1,0 +1,15 @@
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+    
+App_product: 
+#modifier le nom du bundle
+#@ emplacement de fichier
+    resource: "@AppBundle/Resources/config/routing/product.yml"
+    prefix:   /product
+    
+App_category: 
+#modifier le nom du bundle
+#@ emplacement de fichier
+    resource: "@AppBundle/Resources/config/routing/category.yml"
+    prefix:   /category

@@ -1,0 +1,75 @@
+{% extends "AppBundle:Layaout:base.html.twig" %}
+
+{% block body %}
+    <h1>Product creation</h1>
+
+    {{ form_start(form, {attr: {novalidate: 'novalidate', class: 'form-horizontal'}}) }}
+    {#    novalidate : desactiver validation hmlt5#}
+    {#        {{ form_widget(form) }} 
+    afficher tous les champs
+    form_error#}
+    <small style="color: red">{{ form_errors(form) }}</small>
+
+    <div class="form-group">
+        {{ form_label(form.name) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.name) }}
+            {{ form_errors(form.name) }}
+        </div>
+    </div>
+    <br><br>
+    <div class="form-group">
+        {{ form_label(form.price) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.price) }}
+            {{ form_errors(form.price) }}
+        </div>
+    </div>
+    <br><br>
+
+    <div class="form-group">
+        {{ form_label(form.qte) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.qte) }} {#aprés la form.qte, {'attr': {'class': 'foo'}}#}
+            {{ form_errors(form.qte) }}
+        </div>
+    </div>
+    <br><br>
+    <div class="form-group">
+        {{ form_label(form.file) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.file) }} {#aprés la form.qte, {'attr': {'class': 'foo'}}#}
+            {{ form_errors(form.file) }}
+        </div>
+    </div>
+    <br><br>
+
+    <div class="form-group">
+        {{ form_label(form.test) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.test) }}
+            {{ form_errors(form.test) }}
+        </div>
+    </div>
+    <br><br>
+    <div class="form-group">
+        {{ form_label(form.categorie) }}
+        <div class="col-sm-10">
+            {{ form_widget(form.categorie) }}
+            {{ form_errors(form.categorie) }}
+        </div>
+    </div>
+    <br><br>
+
+    {{ form_widget(form._token) }}
+    {#        générer le token pour éviter les erreurs#}
+    <div class="form-group">
+        <a class="btn btn-info" href="{{ path('product_index') }}">Back to the list</a>
+
+        <input class="btn btn-danger" type="submit" value="Create">
+    </div>
+    {#{{ form_end(form) }}#}
+</form>
+{#afficher que les champs mentionnées#}
+
+{% endblock %}
